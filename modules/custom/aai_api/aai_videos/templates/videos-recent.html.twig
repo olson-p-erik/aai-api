@@ -1,0 +1,10 @@
+<div class="container">
+  <h1> {{ data.title }} </h1>
+  <div><strong> {{ pagehtml }} </strong></div>
+
+  {% for video in data.videos %}
+    <div>{{ video.attributes.title}}</div>
+    <div>{{ video.attributes.url}}</div>
+  {% endfor %}
+
+</div>

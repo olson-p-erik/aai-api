@@ -1,0 +1,7 @@
+videos_recent:
+  path: 'videos_recent'
+  defaults:
+    _controller: '\Drupal\aai_videos\Controller\VideosController::getRecentList'
+    _title: 'Most Recent Videos'
+  requirements:
+    _permission: 'access content'

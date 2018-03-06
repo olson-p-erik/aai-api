@@ -1,0 +1,80 @@
+<?php
+	define('AAI_API_URL', 'https://proofapi.herokuapp.com/')
+	define('AAI_API_KEY', 'ZyTesjx7mRRpFaFxMpCWgSD6');
+
+
+	/**
+	 * AAI API module.
+	 */
+	function aai_api_response( $url, $method = 'GET', $params = array() ) {
+		$methods = array(
+			'POST',
+			'GET',
+			'PUT',
+			'DELETE'
+		);
+		$result = array();
+
+		try {
+			if ( empty( $url ) ) {
+				throw new Exception( "Invalid url" );
+			}
+			if ( in_array( strtoupper( $method ), $methods ) === FALSE ) {
+				throw new Exception( "Invalid method" );
+			}
+			else {
+
+				switch ( strtoupper( $method ) ) {
+					case 'GET':
+					case 'POST':
+					case 'PUT':
+					case 'DELETE':
+						$result = aai_api_call_request( $url, $method, $params );
+						break;
+					default:
+						throw new Exception( "Invalid method" );
+						break;
+				}
+			}
+		}
+		catch ( Exception $e ) {
+			echo $e->getMessage();
+		}
+
+		return $result;
+	}
+
+	function aai_api_call_request( $url, $method, $params = array() ) {
+		try {
+
+			// initialized curl
+			$ch = curl_init();
+
+			// set header for curl request
+			$headers = array(
+				"Cache-Control: no-cache",
+				"Pragma: no-cache",
+				"X-Auth-Token: " . AAI_API_KEY
+			);
+
+			// set required setting with curl configuration
+			curl_setopt( $ch, CURLOPT_URL, $url );
+			curl_setopt( $ch, CURLOPT_HTTPHEADER, $headers );
+			curl_setopt( $ch, CURLOPT_FRESH_CONNECT, TRUE );
+			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, TRUE );
+			curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, $method );
+			curl_setopt( $ch, CURLOPT_FORBID_REUSE, 1 );
+
+			// pass the additional values
+			curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $params ) );
+
+			// close the curl connection
+			$result = curl_exec( $ch );
+			curl_close( $ch );
+
+			return $result;
+		}
+		catch ( Exception $e ) {
+			echo $e->getMessage();
+		}
+	}

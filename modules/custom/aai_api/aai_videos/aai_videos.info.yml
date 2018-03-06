@@ -1,0 +1,9 @@
+name: Videos - August Ash Inc API
+description: Submodule for AAI API Videos
+package: Custom
+
+type: module
+core: 8.x
+
+dependencies:
+  - custom:aai_api

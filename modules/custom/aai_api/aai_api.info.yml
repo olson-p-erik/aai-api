@@ -1,0 +1,6 @@
+name: August Ash Inc API
+description: Used for connecting to AAI's videos API
+package: Custom
+
+type: module
+core: 8.x

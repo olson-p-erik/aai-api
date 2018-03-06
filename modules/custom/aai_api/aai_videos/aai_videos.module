@@ -1,0 +1,12 @@
+<?php
+
+function aai_videos_theme($existing, $type, $theme, $path) {
+	return array(
+		'videos_recent' => array(
+			'variables' => array(
+				'pagehtml' => null,
+				'data' => null,
+			),
+		),
+	);
+}
