@@ -1,5 +1,5 @@
 <?php
-	define('AAI_API_URL', 'https://proofapi.herokuapp.com/')
+	define('AAI_API_URL', 'https://proofapi.herokuapp.com/');
 	define('AAI_API_KEY', 'ZyTesjx7mRRpFaFxMpCWgSD6');
 
 
