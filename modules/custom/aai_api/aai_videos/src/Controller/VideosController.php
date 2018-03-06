@@ -21,7 +21,7 @@
 
 			if ( $response ) {
 
-				$result = json_decode($response);
+				$result = json_decode($response, true);
 				$data = array();
 
 				$data['title'] = 'Most Recent Videos';
