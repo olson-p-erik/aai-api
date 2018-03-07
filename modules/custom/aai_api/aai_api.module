@@ -41,6 +41,9 @@
 			echo $e->getMessage();
 		}
 
+		//ERIK REMOVE
+		//\Drupal::logger('aai_api')->notice('Results from API call: ' . $result);
+
 		return $result;
 	}
 

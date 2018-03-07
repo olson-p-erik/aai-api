@@ -3,9 +3,10 @@
 
   {% for video in data.videos %}
     <div>
-    	<span>{{ video.title }}</span>
-    	<span>{{ video.url }}</span>
-    	<span>{{ video.view_tally }}</span>
+      <span>{{ video.rank }}</span>
+      <span>{{ video.view_tally }}</span>
+      <span>{{ video.title }}</span>
+      <span>{{ video.url }}</span>
     	<span>{{ video.vote_tally }}</span>
     	<span>{{ video.created_at }}</span>
 	</div>

@@ -5,3 +5,19 @@ videos_recent:
     _title: 'Most Recent Videos'
   requirements:
     _permission: 'access content'
+
+videos_ranked_votes:
+  path: 'videos_ranked_votes'
+  defaults:
+    _controller: '\Drupal\aai_videos\Controller\VideosController::getRankdedVotesList'
+    _title: 'Top 10 Voted Videos'
+  requirements:
+    _permission: 'access content'
+
+videos_ranked_views:
+  path: 'videos_ranked_views'
+  defaults:
+    _controller: '\Drupal\aai_videos\Controller\VideosController::getRankdedViewsList'
+    _title: 'Top 10 Most Viewed Videos'
+  requirements:
+    _permission: 'access content'

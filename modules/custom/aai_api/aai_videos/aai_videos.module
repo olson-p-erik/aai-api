@@ -8,5 +8,17 @@ function aai_videos_theme($existing, $type, $theme, $path) {
 				'data' => null,
 			),
 		),
+		'videos_ranked_votes' => array(
+			'variables' => array(
+				'pagehtml' => null,
+				'data' => null,
+			),
+		),
+		'videos_ranked_views' => array(
+			'variables' => array(
+				'pagehtml' => null,
+				'data' => null,
+			),
+		),
 	);
 }
