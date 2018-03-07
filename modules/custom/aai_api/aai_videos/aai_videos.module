@@ -1,6 +1,6 @@
 <?php
 
-function aai_videos_theme($existing, $type, $theme, $path) {
+function aai_videos_theme( $existing, $type, $theme, $path ) {
 	return [
 		'videos_recent' => [
 			'variables' => [
@@ -20,5 +20,5 @@ function aai_videos_theme($existing, $type, $theme, $path) {
 				'data' => null,
 			],
 		],
-	);
+	];
 }
