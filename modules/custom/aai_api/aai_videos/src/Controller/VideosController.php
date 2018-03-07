@@ -6,14 +6,15 @@
 
 	class VideosController extends ControllerBase {
 
-		
+		private $api_videos_url = 'https://proofapi.herokuapp.com/videos';
+
 		public function getRecentList() {
 			$response = null;
 			$result = null;
-			$build = array();
+			$build = [];
 
 			if ( function_exists( 'aai_api_response' ) ) {
-				$response = aai_api_response( 'https://proofapi.herokuapp.com/videos', 'GET' );
+				$response = aai_api_response( $this->api_videos_url, 'GET' );
 			}
 
 			if ( $response ) {
@@ -24,16 +25,16 @@
 				//\Drupal::logger('aai_videos')->notice('Results from videos API call: ' . var_dump($result['data']));
 				$formatted_videos = $this->sortVideos( $result['data'] );
 
-				$data = array();
+				$data = [];
 
 				$data['videos'] = $formatted_videos;
 
-				$build = array(
+				$build = [
 					'#theme' => 'videos_recent',
 					'#title' => 'Most Recent Videos',
 					'#pagehtml' => 'All the greatest new videos',
 					'#data' => $data
-				);
+				];
 			}
 			return $build;
 		}
@@ -41,10 +42,10 @@
 		public function getRankdedVotesList() {
 			$response = null;
 			$result = null;
-			$build = array();
+			$build = [];
 
 			if ( function_exists( 'aai_api_response' ) ) {
-				$response = aai_api_response( 'https://proofapi.herokuapp.com/videos', 'GET' );
+				$response = aai_api_response( $this->api_videos_url, 'GET' );
 			}
 
 			if ( $response ) {
@@ -55,16 +56,16 @@
 				//\Drupal::logger('aai_videos')->notice('Results from videos API call: ' . var_dump($result['data']));
 				$formatted_videos = $this->sortRankedVideos( $result['data'], 'votes' );
 
-				$data = array();
+				$data = [];
 
 				$data['videos'] = $formatted_videos;
 
-				$build = array(
+				$build = [
 					'#theme' => 'videos_ranked_votes',
 					'#title' => 'Top 10 Voted Videos',
 					'#pagehtml' => 'The greatest new videos, as voted by you',
 					'#data' => $data
-				);
+				];
 			}
 			return $build;
 		}
@@ -72,10 +73,10 @@
 		public function getRankdedViewsList() {
 			$response = null;
 			$result = null;
-			$build = array();
+			$build = [];
 
 			if ( function_exists( 'aai_api_response' ) ) {
-				$response = aai_api_response( 'https://proofapi.herokuapp.com/videos', 'GET' );
+				$response = aai_api_response( $this->api_videos_url, 'GET' );
 			}
 
 			if ( $response ) {
@@ -86,27 +87,27 @@
 				//\Drupal::logger('aai_videos')->notice('Results from videos API call: ' . var_dump($result['data']));
 				$formatted_videos = $this->sortRankedVideos( $result['data'], 'views' );
 
-				$data = array();
+				$data = [];
 
 				$data['videos'] = $formatted_videos;
 
-				$build = array(
+				$build = [
 					'#theme' => 'videos_ranked_views',
 					'#title' => 'Top 10 Most Viewed Videos',
 					'#pagehtml' => "The videos you can't stop watching",
 					'#data' => $data
-				);
+				];
 			}
 			return $build;
 		}
 
 		public function sortVideos( $videos ) {
-			$formatted_videos = array();
+			$formatted_videos = [];
 
 			usort( $videos, array( $this, "sortByRecent" ) );
 
 			foreach ( $videos as $video ) {
-				$formatted = array();
+				$formatted = [];
 				$formatted['title'] = $video['attributes']['title'];
 				$formatted['url'] = $video['attributes']['url'];
 				$formatted['view_tally'] = $video['attributes']['view_tally'];
@@ -123,7 +124,7 @@
 
 		public function sortRankedVideos( $videos, $rank_type ) {
 			$num_videos = 10;
-			$formatted_videos = array();
+			$formatted_videos = [];
 
 			if ( $rank_type == 'votes' ) {
 				usort( $videos, array( $this, "sortByVotes" ) );
@@ -132,7 +133,7 @@
 			}
 
 			for ( $i=0; $i < $num_videos; $i++ ) { 
-				$formatted = array();
+				$formatted = [];
 				$formatted['rank'] = $i + 1;
 				$formatted['title'] = $videos[$i]['attributes']['title'];
 				$formatted['url'] = $videos[$i]['attributes']['url'];

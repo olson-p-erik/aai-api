@@ -21,3 +21,19 @@ videos_ranked_views:
     _title: 'Top 10 Most Viewed Videos'
   requirements:
     _permission: 'access content'
+
+add_new_video.form:
+  path: '/add_new_video'
+  defaults:
+    _form: 'Drupal\aai_videos\Form\AddVideoForm'
+    _title: 'Add Video'
+  requirements:
+    _permission: 'access content'
+
+submit_video.form:
+  path: '/submit_video'
+  defaults:
+    _controller: '\Drupal\aai_videos\Controller\SubmitVideoController::openSubmitVideoForm'
+    _title: 'Submit Video'
+  requirements:
+    _permission: 'access content'

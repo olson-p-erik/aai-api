@@ -1,24 +1,24 @@
 <?php
 
 function aai_videos_theme($existing, $type, $theme, $path) {
-	return array(
-		'videos_recent' => array(
-			'variables' => array(
+	return [
+		'videos_recent' => [
+			'variables' => [
 				'pagehtml' => null,
 				'data' => null,
-			),
-		),
-		'videos_ranked_votes' => array(
-			'variables' => array(
+			],
+		],
+		'videos_ranked_votes' => [
+			'variables' => [
 				'pagehtml' => null,
 				'data' => null,
-			),
-		),
-		'videos_ranked_views' => array(
-			'variables' => array(
+			],
+		],
+		'videos_ranked_views' => [
+			'variables' => [
 				'pagehtml' => null,
 				'data' => null,
-			),
-		),
+			],
+		],
 	);
 }
