@@ -5,6 +5,12 @@
  */
 function aai_videos_theme( $existing, $type, $theme, $path ) {
 	return [
+		'view_video' => [
+			'variables' => [
+				'pagehtml' => null,
+				'data' => null,
+			],
+		],
 		'videos_recent' => [
 			'variables' => [
 				'pagehtml' => null,

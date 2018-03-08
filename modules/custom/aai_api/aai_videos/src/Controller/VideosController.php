@@ -11,6 +11,56 @@ use Drupal\Core\Controller\ControllerBase;
 class VideosController extends ControllerBase {
 
 	private $api_videos_url = 'https://proofapi.herokuapp.com/videos';
+	
+	/**
+	 * This method makes the API call to get an individual video
+	 * and builds the data for the page
+	 * @param  string $video_id The id of the video to retrieve from the API
+	 * @return array            Build data for the video
+	 */
+	public function getVideo( $video_id ) {
+		$response = null;
+		$result = null;
+		$build = [];
+
+		if ( function_exists( 'aai_api_response' ) ) {
+			$video_url = $this->api_videos_url . '/' . $video_id;
+			$response = aai_api_response( $video_url, 'GET' );
+		}
+
+		if ( $response ) {
+
+			$result = json_decode($response, true);
+			$formatted_video = $this->formatVideo( $result['data'] );
+
+			$data = [];
+			$data['video'] = $formatted_video;
+
+			$build = [
+				'#theme' => 'view_video',
+				'#title' => 'View Video',
+				'#pagehtml' => 'The video you asked for',
+				'#data' => $data
+			];
+		}
+		return $build;
+	}
+
+	/**
+	 * This method trims out the unnecessary data from the video array returned by the API call
+	 * @param  array $video The raw API video data
+	 * @return array        The trimmed, formatted video data
+	 */
+	public function formatVideo( array $video ) {
+		$formatted_video = [];
+		$formatted_video['id'] = $video['id'];
+		$formatted_video['title'] = $video['attributes']['title'];
+		$formatted_video['url'] = $video['attributes']['url'];
+		$formatted_video['view_tally'] = $video['attributes']['view_tally'];
+		$formatted_video['vote_tally'] = $video['attributes']['vote_tally'];
+		$formatted_video['created_at'] = $video['attributes']['created_at'];
+		return $formatted_video;
+	}
 
 	/**
 	 * This method makes the API call to get all of the videos, sorts them by most recent,

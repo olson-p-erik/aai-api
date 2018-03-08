@@ -22,6 +22,14 @@ videos_ranked_views:
   requirements:
     _permission: 'access content'
 
+view_video:
+  path: 'video/{video_id}'
+  defaults:
+    _controller: '\Drupal\aai_videos\Controller\VideosController::getVideo'
+    _title: 'View Video'
+  requirements:
+    _permission: 'access content'
+
 add_new_video.form:
   path: '/add_new_video'
   defaults:
