@@ -1,0 +1,9 @@
+aai_videos_library:
+  version: 1.x
+  css:
+    base:
+      css/aai_videos_base.css: {}
+  js:
+    js/view_video.js: {}
+  dependencies:
+    - core/jquery

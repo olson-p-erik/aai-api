@@ -53,7 +53,7 @@ class SubmitVideoController extends ControllerBase {
 		$modal_form = $this->form_builder->getForm( 'Drupal\aai_videos\Form\SubmitVideoForm' );
 
 		//Add an AJAX command to open a modal dialog with the form as the content.
-		$response->addCommand( new OpenModalDialogCommand( 'Submit Video Form', $modal_form, ['width' => '800'] ) );
+		$response->addCommand( new OpenModalDialogCommand( 'Submit a New Video', $modal_form, ['width' => '800'] ) );
 
 		return $response;
 	}

@@ -1,6 +1,13 @@
 <?php
 
 /**
+ * Implements hook_page_attachments().
+ */
+function aai_videos_page_attachments( array &$page ){
+	$page['#attached']['library'][] = 'aai_videos/aai_videos_library';
+}
+
+/**
  * Implements hook_theme().
  */
 function aai_videos_theme( $existing, $type, $theme, $path ) {

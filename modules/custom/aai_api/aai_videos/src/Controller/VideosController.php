@@ -56,8 +56,8 @@ class VideosController extends ControllerBase {
 		$formatted_video['id'] = $video['id'];
 		$formatted_video['title'] = $video['attributes']['title'];
 		$formatted_video['url'] = $video['attributes']['url'];
-		$formatted_video['view_tally'] = $video['attributes']['view_tally'];
-		$formatted_video['vote_tally'] = $video['attributes']['vote_tally'];
+		$formatted_video['view_tally'] = $this->pluralize( $video['attributes']['view_tally'], 'view' );
+		$formatted_video['vote_tally'] = $this->pluralize( $video['attributes']['vote_tally'], 'vote' );
 		$formatted_video['created_at'] = $video['attributes']['created_at'];
 		return $formatted_video;
 	}
@@ -100,7 +100,7 @@ class VideosController extends ControllerBase {
 	 * and builds the data for the page.
 	 * @return array Build data for the Most Recent Videos page
 	 */
-	public function getRankdedVotesList() {
+	public function getRankedVotesList() {
 		$response = null;
 		$result = null;
 		$build = [];
@@ -120,7 +120,7 @@ class VideosController extends ControllerBase {
 			$build = [
 				'#theme' => 'videos_ranked_votes',
 				'#title' => 'Top 10 Voted Videos',
-				'#pagehtml' => 'The greatest new videos, as voted by you',
+				'#pagehtml' => "The videos you can't stop upvoting",
 				'#data' => $data
 			];
 		}
@@ -133,7 +133,7 @@ class VideosController extends ControllerBase {
 	 * and builds the data for the page.
 	 * @return array Build data for the Most Recent Videos page
 	 */
-	public function getRankdedViewsList() {
+	public function getRankedViewsList() {
 		$response = null;
 		$result = null;
 		$build = [];
@@ -171,14 +171,18 @@ class VideosController extends ControllerBase {
 
 		usort( $videos, array( $this, "sortByRecent" ) );
 
+		$rank = 1;
 		foreach ( $videos as $video ) {
 			$formatted = [];
+			$formatted['rank'] = $rank;
+			$formatted['id'] = $video['id'];
 			$formatted['title'] = $video['attributes']['title'];
 			$formatted['url'] = $video['attributes']['url'];
-			$formatted['view_tally'] = $video['attributes']['view_tally'];
-			$formatted['vote_tally'] = $video['attributes']['vote_tally'];
+			$formatted['view_tally'] = $this->pluralize( $video['attributes']['view_tally'], 'view' );
+			$formatted['vote_tally'] = $this->pluralize( $video['attributes']['vote_tally'], 'vote' );
 			$formatted['created_at'] = $video['attributes']['created_at'];
 			$formatted_videos[] = $formatted;
+			$rank++;
 		}
 
 		return $formatted_videos;
@@ -204,10 +208,11 @@ class VideosController extends ControllerBase {
 		for ( $i=0; $i < $num_videos; $i++ ) { 
 			$formatted = [];
 			$formatted['rank'] = $i + 1;
+			$formatted['id'] = $videos[$i]['id'];
 			$formatted['title'] = $videos[$i]['attributes']['title'];
 			$formatted['url'] = $videos[$i]['attributes']['url'];
-			$formatted['view_tally'] = $videos[$i]['attributes']['view_tally'];
-			$formatted['vote_tally'] = $videos[$i]['attributes']['vote_tally'];
+			$formatted['view_tally'] = $this->pluralize( $videos[$i]['attributes']['view_tally'], 'view' );
+			$formatted['vote_tally'] = $this->pluralize( $videos[$i]['attributes']['vote_tally'], 'vote' );
 			$formatted['created_at'] = $videos[$i]['attributes']['created_at'];
 			$formatted_videos[] = $formatted;
 		}
@@ -246,6 +251,21 @@ class VideosController extends ControllerBase {
 			return 0;
 		}
 		return ($a['attributes']["view_tally"] > $b['attributes']["view_tally"]) ? -1 : 1;
+	}
+
+	/**
+	 * Properly pluralize the votes/views for the page
+	 * @param  int    $number The number we're checking
+	 * @param  string $noun   The word we're pluralizing, either view(s) or vote(s)
+	 * @return string         A pluralized string
+	 */
+	public function pluralize( $number, $noun ) {
+		if ( $number == 1 || $number == -1 ) {
+			return $number . ' ' . $noun;
+		}
+		else {
+			return $number . ' ' . $noun . 's';
+		}
 	}
 }
 ?>
