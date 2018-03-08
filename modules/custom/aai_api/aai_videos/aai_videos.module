@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Implements hook_theme().
+ */
 function aai_videos_theme( $existing, $type, $theme, $path ) {
 	return [
 		'videos_recent' => [

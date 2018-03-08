@@ -8,7 +8,10 @@ use Drupal\Core\Ajax\OpenModalDialogCommand;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Form\FormBuilder;
 
-
+/**
+ * This controller class contains the callback method used by the AddVideoForm,
+ * which builds the submit form and opens the SubmitVideoForm in a modal
+ */
 class SubmitVideoController extends ControllerBase {
 
 	/**
@@ -19,10 +22,9 @@ class SubmitVideoController extends ControllerBase {
 	protected $form_builder;
 
 	/**
-	 * The ModalFormExampleController constructor.
+	 * The SubmitVideoController constructor.
 	 *
-	 * @param \Drupal\Core\Form\FormBuilder $form_builder
-	 *   The form builder.
+	 * @param FormBuilder $form_builder The form builder.
 	 */
 	public function __construct(FormBuilder $form_builder) {
 		$this->form_builder = $form_builder;
@@ -31,28 +33,27 @@ class SubmitVideoController extends ControllerBase {
 	/**
 	 * {@inheritdoc}
 	 *
-	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-	 *   The Drupal service container.
+	 * @param ContainerInterface $container The Drupal service container.
 	 *
 	 * @return static
 	 */
 	public static function create(ContainerInterface $container) {
 		return new static(
-			$container->get('form_builder')
+			$container->get( 'form_builder' )
 		);
 	}
 
 	/**
-	 * Callback for opening the modal form.
+	 * Callback for opening the Submit Video modal form.
 	 */
-	public function openModalForm() {
+	public function openSubmitVideoForm() {
 		$response = new AjaxResponse();
 
-		// Get the modal form using the form builder.
-		$modal_form = $this->form_builder->getForm('Drupal\aai_videos\Form\ModalForm');
+		//Get the modal form using the form builder.
+		$modal_form = $this->form_builder->getForm( 'Drupal\aai_videos\Form\SubmitVideoForm' );
 
-		// Add an AJAX command to open a modal dialog with the form as the content.
-		$response->addCommand(new OpenModalDialogCommand('Submit Video Form', $modal_form, ['width' => '800']));
+		//Add an AJAX command to open a modal dialog with the form as the content.
+		$response->addCommand( new OpenModalDialogCommand( 'Submit Video Form', $modal_form, ['width' => '800'] ) );
 
 		return $response;
 	}

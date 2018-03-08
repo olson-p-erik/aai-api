@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\aai_videos\Plugin\AddVideoBlock;
+namespace Drupal\aai_videos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormInterface;

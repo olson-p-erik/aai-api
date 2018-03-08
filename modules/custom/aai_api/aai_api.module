@@ -1,9 +1,13 @@
 <?php
 	define('AAI_API_KEY', 'ZyTesjx7mRRpFaFxMpCWgSD6');
 
-
 	/**
-	 * AAI API module.
+	 * This is the main method used by the submodule to make the API calls.
+	 * It checks that it was given a valid URL and method.
+	 * @param  string $url    The API URL to hit
+	 * @param  string $method The HTTP method to use in this API request
+	 * @param  array  $params The parameters to pass in the request
+	 * @return array          The response returned by the API
 	 */
 	function aai_api_response( $url, $method = 'GET', $params = [] ) {
 		$methods = [
@@ -12,7 +16,7 @@
 			'PUT',
 			'DELETE'
 		];
-		$result = [];
+		$response = [];
 
 		try {
 			if ( empty( $url ) ) {
@@ -28,7 +32,7 @@
 					case 'POST':
 					case 'PUT':
 					case 'DELETE':
-						$result = aai_api_call_request( $url, $method, $params );
+						$response = aai_api_call_request( $url, $method, $params );
 						break;
 					default:
 						throw new Exception( "Invalid method" );
@@ -40,12 +44,16 @@
 			echo $e->getMessage();
 		}
 
-		//ERIK REMOVE
-		//\Drupal::logger('aai_api')->notice('Results from API call: ' . $result);
-
-		return $result;
+		return $response;
 	}
 
+	/**
+	 * This is the method that actually sends the request to the API using curl
+	 * @param  string $url    The API URL to hit
+	 * @param  string $method The HTTP method to use in this API request
+	 * @param  array  $params The parameters to pass in the request
+	 * @return array          The response returned by the API
+	 */
 	function aai_api_call_request( $url, $method, $params = [] ) {
 		try {
 
@@ -71,10 +79,10 @@
 			curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $params ) );
 
 			// close the curl connection
-			$result = curl_exec( $ch );
+			$response = curl_exec( $ch );
 			curl_close( $ch );
 
-			return $result;
+			return $response;
 		}
 		catch ( Exception $e ) {
 			echo $e->getMessage();
