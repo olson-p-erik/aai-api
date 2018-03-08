@@ -38,17 +38,35 @@
   margin-bottom: 4px;
 }
 
-.list-video-options {
+.list-video-views {
   color:grey;
   font-weight:bold;
   margin-bottom: 1em;
 }
 
-.list-video-options > span {
+.list-video-views > span {
   margin-right: .25em;
 }
 
 /* VIEW VIDEO */
+.view-video {
+  display:grid;
+  grid-template-columns: 1fr 8fr;
+  /*grid-auto-rows: 200px;*/
+  font-family:verdana;
+}
+
+.view-video-votes {
+/*  margin-top: 30px;*/
+  text-align: center;
+  color: grey;
+}
+
+.view-video-body {
+  margin-left: 1em;
+  margin-top: 20px;
+}
+
 .arrow {
   border: solid grey;
   border-width: 0 3px 3px 0;
@@ -57,12 +75,12 @@
 }
 
 .up {
-    margin-top: 40px;
-    transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
+  margin-top: 40px;
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
 }
 
 .down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
