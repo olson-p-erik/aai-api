@@ -85,6 +85,12 @@ class SubmitVideoForm extends FormBase {
 			//Jump out of the validation before sending an API request, since this isn't even a valid URL
 			return;
 		}
+		elseif ( ( date('N') >= 6 ) ) {
+			$form_state->setErrorByName( 'video_title', $this->t( 'Sorry, you cannot submit videos on the weekend. You know that.' ) );
+
+			//Jump out of the validation before sending an API request, since this isn't even a valid URL
+			return;
+		}
 
 		//Ideally we would submit the video in the submitModalFormAjax method, but this way we can display errors on the form inputs
 		$this->submitVideo( $form_state );

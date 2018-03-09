@@ -1,11 +1,11 @@
 <div class="container">
   <div><strong> {{ pagehtml }} </strong></div>
 
-  <div class="view-video">
+  <div class="view-video" id="video" data-video-id="{{ data.video.id }}" data-video-url="{{ data.video.url }}">
     <div class="view-video-votes">
-      <div class="arrow up" onclick='voteup()' id='upvote'></div>
+      <button class="vote button-up" id='upvote'>+</button>
       <div id="votes">{{ data.video.vote_tally }}</div>
-      <div class="arrow down" onclick='votedown()' id='downvote'></div>
+      <button class="vote button-down" id='downvote'>-</button>
     </div>
     <div class="view-video-body">
       <a href="{{ data.video.url }}" class="view-video-title">{{ data.video.title }}</a>
@@ -16,4 +16,5 @@
     </div>
   </div>
 
+  <div id="video_window" class="video-window"></div>
 </div>

@@ -30,6 +30,14 @@ view_video:
   requirements:
     _permission: 'access content'
 
+vote_video:
+  path: 'votes/{vote}/{video_id}'
+  defaults:
+    _controller: '\Drupal\aai_videos\Controller\VotesController::voteVideo'
+    _title: 'Vote Video'
+  requirements:
+    _permission: 'access content'
+
 add_new_video.form:
   path: '/add_new_video'
   defaults:

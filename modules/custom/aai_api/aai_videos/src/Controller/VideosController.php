@@ -121,6 +121,9 @@ class VideosController extends ControllerBase {
 				'#theme' => 'videos_ranked_votes',
 				'#title' => 'Top 10 Voted Videos',
 				'#pagehtml' => "The videos you can't stop upvoting",
+				'#cache' => [
+  					'max-age' => 300,
+  				],
 				'#data' => $data
 			];
 		}
@@ -154,6 +157,9 @@ class VideosController extends ControllerBase {
 				'#theme' => 'videos_ranked_views',
 				'#title' => 'Top 10 Most Viewed Videos',
 				'#pagehtml' => "The videos you can't stop watching",
+				'#cache' => [
+  					'max-age' => 300,
+  				],
 				'#data' => $data
 			];
 		}
