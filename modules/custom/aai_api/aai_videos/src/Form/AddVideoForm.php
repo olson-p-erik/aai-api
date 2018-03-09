@@ -6,7 +6,9 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
-
+/**
+ * The form class for the Add a New Video button, which opens the actual Submit Video modal using ajax
+ */
 class AddVideoForm extends FormBase {
 
 	/**

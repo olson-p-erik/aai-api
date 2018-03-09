@@ -2,6 +2,7 @@
 
 /**
  * Implements hook_page_attachments().
+ * Attaches the library containing the CSS & JS
  */
 function aai_videos_page_attachments( array &$page ){
 	$page['#attached']['library'][] = 'aai_videos/aai_videos_library';
